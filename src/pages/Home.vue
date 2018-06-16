@@ -71,6 +71,7 @@ export default {
               lng: position.coords.longitude
             }
             this.isGmap = true
+            alert('緯度:' + position.coords.latitude + '\n' + '経度:' + position.coords.longitude)
           },
           error => {
             switch (error.code) {
