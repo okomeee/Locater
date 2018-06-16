@@ -23,7 +23,6 @@
     </div>
   </v-ons-page>
 </template>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIBsTzhroaRiFPbTl1D6wSacSYhLaQ_TE"&callback=initMap></script>
 <script>
 export default {
   name: 'Home',

@@ -20,7 +20,7 @@ Object.values(VOns).forEach(comp => Vue.component(comp.name, comp))
 /* eslint-disable no-new */
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyDIBsTzhroaRiFPbTl1D6wSacSYhLaQ_TE',
+    key: 'APIKEY',
     libraries: 'places' // necessary for places input
   }
 })
