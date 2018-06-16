@@ -21,11 +21,6 @@
         </gmap-map>
       </div>
     </div> -->
-    <div style="text-align:center;">
-      <div style="font-size:10px;">2回押してください</div>
-    </div>
-    <br>
-    <br>
     <div v-show="isGmap" style="text-align:center;">
       <div>ここは</div>
       <div id="result" style="font-size: 20px;"></div>
