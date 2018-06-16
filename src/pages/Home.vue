@@ -8,10 +8,10 @@
       <div style="text-align:center; margin: 5% 0;"><img src="../assets/onsenui-logo.png" alt="logo"></div>
     </header>
 
-    <div style="text-align:center; margin: 5% 0;"><button @click="getLocation()"><p style="font-size:20px;margin:0;">位置情報の取得</p></button></div>
+    <div style="text-align:center; margin: 5% 0;"><button @click="geo()"><p style="margin: 0;">位置情報の取得</p></button></div>
 
     <!-- <div id="map"></div> -->
-    <div v-show="isGmap" style="text-align:center;">
+    <!-- <div v-show="isGmap" style="text-align:center;">
       <div>
         <gmap-map
           :center="center"
@@ -20,10 +20,21 @@
         >
         </gmap-map>
       </div>
+    </div> -->
+    <div style="text-align:center;">
+      <div style="font-size:10px;">2回押してください</div>
     </div>
+    <br>
+    <br>
+    <div v-show="isGmap" style="text-align:center;">
+      <div>ここは</div>
+      <div id="result" style="font-size: 20px;"></div>
+    </div>
+
   </v-ons-page>
 </template>
 <script>
+import {gmapApi} from 'vue2-google-maps'
 export default {
   name: 'Home',
   data: function () {
@@ -33,35 +44,23 @@ export default {
       isGmap: false
     }
   },
+  computed: {
+    google: gmapApi
+  },
   methods: {
-    // initMap() {
-    //   var map = new google.maps.Map(document.getElementById ('map'), {
-    //     center: {lat: -34.397, lng: 150.644},
-    //     zoom: 6
-    //   })
-    //   var infoWindow = new google.maps.InfoWindow({map: map})
-    //   // Try HTML5 geolocation.
-    //   if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-    //       var pos = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //       }
-    //       infoWindow.setPosition(pos)
-    //       infoWindow.setContent('Location found.')
-    //       map.setCenter(pos)
-    //     }, function () {
-    //       this.handleLocationError(true, infoWindow, map.getCenter())
-    //     })
-    //   } else {
-    //     // Browser doesn't support Geolocation
-    //     this.handleLocationError(false, infoWindow, map.getCenter())
-    //   }
-    // },
-    // handleLocationError (browserHasGeolocation, infoWindow, pos) {
-    //   infoWindow.setPosition(pos)
-    //   infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.')
-    // },
+    geo () {
+      this.getLocation()
+      new this.google.maps.Geocoder().geocode({ location: this.center },
+        (results, status) => {
+          if (status === this.google.maps.GeocoderStatus.OK) {
+            var addData = results[0].address_components
+            var addInf = '「' + addData[4].long_name + addData[3].long_name + addData[2].long_name + '」'
+            document.getElementById('result').innerHTML = addInf
+          } else {
+            alert(status)
+          }
+        })
+    },
     getLocation () {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -71,7 +70,7 @@ export default {
               lng: position.coords.longitude
             }
             this.isGmap = true
-            alert('緯度:' + position.coords.latitude + '\n' + '経度:' + position.coords.longitude)
+            // alert('緯度:' + position.coords.latitude + '\n' + '経度:' + position.coords.longitude)
           },
           error => {
             switch (error.code) {
