@@ -10,6 +10,7 @@ import $ons from 'vue-onsenui/esm'
 import * as VOns from './vue-onsen-components'
 import App from './App'
 import router from './router'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,12 @@ Vue.use($ons)
 Object.values(VOns).forEach(comp => Vue.component(comp.name, comp))
 
 /* eslint-disable no-new */
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDIBsTzhroaRiFPbTl1D6wSacSYhLaQ_TE',
+    libraries: 'places' // necessary for places input
+  }
+})
 
 new Vue({
   el: '#app',
