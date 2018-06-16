@@ -49,28 +49,20 @@ export default {
   },
   methods: {
     geo () {
-      this.getLocation()
-      new this.google.maps.Geocoder().geocode({ location: this.center },
-        (results, status) => {
-          if (status === this.google.maps.GeocoderStatus.OK) {
-            var addData = results[0].address_components
-            var addInf = '「' + addData[4].long_name + addData[3].long_name + addData[2].long_name + '」'
-            document.getElementById('result').innerHTML = addInf
-          } else {
-            alert(status)
-          }
-        })
-    },
-    getLocation () {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           position => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            }
+            new this.google.maps.Geocoder().geocode({ location: {lat: position.coords.latitude, lng: position.coords.longitude} },
+              (results, status) => {
+                if (status === this.google.maps.GeocoderStatus.OK) {
+                  var addData = results[0].address_components
+                  var addInf = '「' + addData[4].long_name + addData[3].long_name + addData[2].long_name + '」'
+                  document.getElementById('result').innerHTML = addInf
+                } else {
+                  alert(status)
+                }
+              })
             this.isGmap = true
-            // alert('緯度:' + position.coords.latitude + '\n' + '経度:' + position.coords.longitude)
           },
           error => {
             switch (error.code) {
@@ -103,8 +95,4 @@ export default {
 </script>
 
 <style scoped>
-
-.a{
-  display: inline-block;
-}
 </style>
