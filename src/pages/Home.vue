@@ -5,7 +5,7 @@
     </v-ons-toolbar>
 
     <header>
-      <div style="text-align:center; margin: 5% 0;"><img src="../assets/onsenui-logo.png" alt="logo"></div>
+      <div style="text-align:center; margin: 5% 0;"><img src="../assets/Vso59x2r_400x400.jpg" alt="logo"></div>
     </header>
 
     <div style="text-align:center; margin: 5% 0;"><button @click="geo()"><p style="margin: 0;">位置情報の取得</p></button></div>
