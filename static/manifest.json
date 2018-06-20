@@ -13,11 +13,7 @@
       "type": "image/png"
     }
   ],
-<<<<<<< HEAD
-  "start_url": "/index.html",
-=======
   "start_url": "/puchi/#/",
->>>>>>> 87db5e50633dfb0a8fdb64acef56f2c14897f457
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#4DBA87"
